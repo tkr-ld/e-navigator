@@ -1,14 +1,13 @@
 class InterviewsController < ApplicationController
+  before_action :set_user, only: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_interview, only: [:show, :edit, :update, :destroy]
 
   def index
-    @user = User.find(params[:user_id])
     @interviews = @user.interviews.order('start_datetime ASC')
   end
 
   def show
-    @user = User.find(params[:user_id])
-    @interview = @user.interviews.find(params[:id])
   end
 
   def new
@@ -17,7 +16,7 @@ class InterviewsController < ApplicationController
 
   def create
     @interview = current_user.interviews.build(interview_params)
-    
+
     if @interview.save
       redirect_to user_interview_path(current_user, @interview), notice: "面接が作成されました。"
     else
@@ -47,9 +46,17 @@ class InterviewsController < ApplicationController
     params.require(:interview).permit(:start_datetime, :status)
   end
 
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
+  def set_interview
+    @interview = Interview.find(params[:id])
+  end
+
   def correct_user
-    @interview = current_user.interviews.find_by(id: params[:id])
-    unless @interview.present?
+    interview = current_user.interviews.find_by(id: params[:id])
+    unless interview.present?
       redirect_to root_url
     end
   end

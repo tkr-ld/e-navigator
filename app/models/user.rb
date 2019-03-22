@@ -8,5 +8,5 @@ class User < ApplicationRecord
   validates :school, length: {maximum: 50}
   enum sex: { woman: 0, man: 1 }
 
-  has_many :interviews
+  has_many :interviews, dependent: :destroy
 end

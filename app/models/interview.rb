@@ -10,4 +10,14 @@ class Interview < ApplicationRecord
       errors.add(:start_datetime, "は未来の時間を指定してください")
     end
   end
+
+  def approve_datetime
+    self.approval!
+    
+    user = self.user
+    interviews = user.interviews.where.not(id: self.id)
+    interviews.each do |interview|
+      interview.rejection!
+    end
+  end
 end

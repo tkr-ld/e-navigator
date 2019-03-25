@@ -7,7 +7,7 @@ table.table.table-hover
       th
       th
     tbody
-      - @interviews.each do |interview|
+      - interviews.each do |interview|
         tr
           td= interview.start_datetime.to_s(:ja)
           td= interview.status_i18n

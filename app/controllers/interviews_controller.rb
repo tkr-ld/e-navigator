@@ -40,6 +40,9 @@ class InterviewsController < ApplicationController
     redirect_to user_interviews_path(@interview.user), notice: "面接日程を削除しました。"
   end
 
+  def approve
+  end
+
   private
 
   def interview_params

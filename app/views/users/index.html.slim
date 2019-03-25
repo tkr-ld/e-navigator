@@ -4,21 +4,24 @@ h1 ユーザー一覧
 table.table.table-hover.table-bordered
   thead.thead-default
     tr
-      th= User.human_attribute_name(:name)
-      th= User.human_attribute_name(:email)
-      th 年齢
-      th= User.human_attribute_name(:sex)
-      th= User.human_attribute_name(:school)
-      th 面接日時
+      th.text-center= User.human_attribute_name(:name)
+      th.text-center= User.human_attribute_name(:email)
+      th.text-center 年齢
+      th.text-center= User.human_attribute_name(:sex)
+      th.text-center= User.human_attribute_name(:school)
+      th.text-center 面接日時
       th
     tbody
       - @users.each do |user|
+        - approval_interview = user.interviews.find_by(status: :approval)
         tr
-          td= user.name
-          td= user.email
-          td= user.age
-          td= user.sex
-          td= user.school
-          td
-          td
+          td.text-center= user.name
+          td.text-center= user.email
+          td.text-center= user.age
+          td.text-center= user.sex
+          td.text-center= user.school
+          td.text-center
+            - if approval_interview.present?
+              = approval_interview.start_datetime.to_s(:ja)
+          td.text-center= link_to '面接一覧', user_interviews_path(user), class: 'btn btn-primary'
 

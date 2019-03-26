@@ -11,10 +11,16 @@ table.table.table-hover
         tr
           td= interview.start_datetime.to_s(:ja)
           td= interview.status_i18n
-          td
-            = link_to '編集', edit_user_interview_path(id: interview.id), class: 'btn btn-secondary'
-          td
-            = link_to '削除', user_interview_path(id: interview.id), method: :delete, data: { confirm: "面接日程を削除します。よろしいですか？" }, class: 'btn btn-danger'
+          - if interview.reservation?
+            td
+                = link_to '編集', edit_user_interview_path(id: interview.id), class: 'btn btn-secondary'
+            td
+                = link_to '削除', user_interview_path(id: interview.id), method: :delete, data: { confirm: "面接日程を削除します。よろしいですか？" }, class: 'btn btn-danger'
+          - else
+            td
+                = link_to '編集', edit_user_interview_path(id: interview.id), class: 'btn btn-secondary disabled'
+            td
+                = link_to '削除', user_interview_path(id: interview.id), method: :delete, data: { confirm: "面接日程を削除します。よろしいですか？" }, class: 'btn btn-danger disabled'
 
 
 =link_to '新規面接作成', new_user_interview_path, class: 'btn btn-primary'

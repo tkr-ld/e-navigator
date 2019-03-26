@@ -2,8 +2,8 @@ class Interview < ApplicationRecord
   belongs_to :user
 
   validates :start_datetime, presence: true
-  validate :add_error_start_datetime, on: :create
-  validate :add_error_start_datetime, on: :update
+  validate :add_error_start_datetime
+  #validate :add_error_start_datetime, on: :update
 
   enum status: { reservation: 0, rejection: 1, approval: 2 }
 
@@ -15,12 +15,14 @@ class Interview < ApplicationRecord
 
   def approve_datetime
     if self.start_datetime.future?
-      self.update(status: :approval)
+      self.approval!
+      #self.update!(status: :approval)
 
       user = self.user
       interviews = user.interviews.where.not(id: self.id)
       interviews.each do |interview|
-        interview.update(status: :rejection) 
+        #interview.rejection! 
+        interview.update_attribute(:status, :rejection)
       end
     else
       set_past_error

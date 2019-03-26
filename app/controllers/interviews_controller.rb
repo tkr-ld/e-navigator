@@ -1,6 +1,6 @@
 class InterviewsController < ApplicationController
   before_action :set_user, only: [:index, :show]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:destroy]
   before_action :different_user, only: [:approve]
   before_action :set_interview, only: [:show, :edit, :update, :destroy]
 
@@ -42,9 +42,12 @@ class InterviewsController < ApplicationController
   end
 
   def approve
-    interview = Interview.find(params[:interview_id])
-    interview.approve_datetime
-    after_update(interview)
+    @interview = Interview.find(params[:interview_id])
+    if @interview.approve_datetime
+      after_update(@interview)
+    else
+      render :edit
+    end
   end
 
   private

@@ -9,7 +9,11 @@ h2 現在の面接日程
 
 hr
 
+p 面接日程を変更する場合は以下から選んでください。
+
 - interviews.each do |interview|
+  - if interview.approval?
+    - next
   = form_with url: user_interview_approve_path(user, interview), method: :patch, local: true do |f|
     = button_tag( data: { confirm: "#{interview.start_datetime.to_s(:ja)}で面接を確定してよろしいですか"}, class: "btn btn-secondary") do
       = content_tag :span, interview.start_datetime.to_s(:ja)

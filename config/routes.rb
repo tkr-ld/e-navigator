@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   root to: 'users#index'
 
   resources :users, only: [:index, :edit, :update] do
-      resources :interviews do
-          patch :approve
-      end
+    resources :interviews do
+      put :approve
+    end
   end
 
   devise_for :users, controllers: {

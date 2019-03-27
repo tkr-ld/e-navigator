@@ -30,7 +30,7 @@ class InterviewsController < ApplicationController
 
   def update
     if @interview.update(interview_params)
-      after_update(@interview)
+      update_success_redirect(@interview)
     else
       render :edit
     end
@@ -44,7 +44,7 @@ class InterviewsController < ApplicationController
   def approve
     @interview = Interview.find(params[:interview_id])
     if @interview.approve_datetime
-      after_update(@interview)
+      update_success_redirect(@interview)
     else
       render :edit
     end
@@ -64,7 +64,7 @@ class InterviewsController < ApplicationController
     @interview = Interview.find(params[:id])
   end
 
-  def after_update(interview)
+  def update_success_redirect(interview)
     redirect_to user_interview_path(interview.user.id, interview), notice: "面接が更新されました。"
   end
 

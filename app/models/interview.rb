@@ -13,12 +13,9 @@ class Interview < ApplicationRecord
   end
 
   def approve_datetime
-    if self.update(status: :approval)
-      user = self.user
+    if update(status: :approval)
       interviews = user.interviews.where.not(id: self.id)
-      interviews.each do |interview| 
-        interview.update_attribute(:status, :rejection)
-      end
+      interviews.update_all(status: :rejection)
     end
   end
 end

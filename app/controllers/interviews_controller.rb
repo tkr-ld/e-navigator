@@ -69,15 +69,13 @@ class InterviewsController < ApplicationController
   end
 
   def correct_user
-    interview = current_user.interviews.find_by(id: params[:id])
-    unless interview.present?
+    unless current_user.interviews.find_by(id: params[:id])
       redirect_to root_url
     end
   end
 
   def different_user
-    interview = current_user.interviews.find_by(id: params[:id])
-    if interview.present?
+    if current_user.interviews.find_by(id: params[:id])
       redirect_to root_url
     end
   end

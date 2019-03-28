@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :edit, :update] do
     resources :interviews do
-      put :approve
+      patch :approve
     end
   end
 

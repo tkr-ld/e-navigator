@@ -11,6 +11,6 @@ class User < ApplicationRecord
   has_many :interviews, dependent: :destroy
 
   def age
-    (Date.today.strftime('%Y%m%d').to_i - birth_date.strftime('%Y%m%d').to_i) / 10000
+    (Date.today.strftime('%Y%m%d').to_i - birth_date.strftime('%Y%m%d').to_i) / 10000 if birth_date
   end
 end

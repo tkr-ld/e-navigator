@@ -54,3 +54,7 @@ gem 'bootstrap'
 gem 'devise'
 
 gem 'enum_help'
+
+gem 'letter_opener_web', group:  :development
+
+gem 'dotenv-rails'

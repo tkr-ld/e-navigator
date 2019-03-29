@@ -1,6 +1,7 @@
 class InterviewsController < ApplicationController
   before_action :set_user, only: [:index, :show]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:destroy]
+  before_action :different_user, only: [:approve]
   before_action :set_interview, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -29,7 +30,7 @@ class InterviewsController < ApplicationController
 
   def update
     if @interview.update(interview_params)
-      redirect_to user_interview_path(current_user.id, @interview), notice: "面接が更新されました。"
+      update_success_redirect(@interview)
     else
       render :edit
     end
@@ -38,6 +39,15 @@ class InterviewsController < ApplicationController
   def destroy
     @interview.destroy
     redirect_to user_interviews_path(@interview.user), notice: "面接日程を削除しました。"
+  end
+
+  def approve
+    @interview = Interview.find(params[:interview_id])
+    if @interview.approve_datetime
+      update_success_redirect(@interview)
+    else
+      render :edit
+    end
   end
 
   private
@@ -54,9 +64,18 @@ class InterviewsController < ApplicationController
     @interview = Interview.find(params[:id])
   end
 
+  def update_success_redirect(interview)
+    redirect_to user_interview_path(interview.user.id, interview), notice: "面接が更新されました。"
+  end
+
   def correct_user
-    interview = current_user.interviews.find_by(id: params[:id])
-    unless interview.present?
+    unless current_user.interviews.find_by(id: params[:id])
+      redirect_to root_url
+    end
+  end
+
+  def different_user
+    if current_user.interviews.find_by(id: params[:id])
       redirect_to root_url
     end
   end

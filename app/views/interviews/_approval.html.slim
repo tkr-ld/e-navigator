@@ -1,0 +1,20 @@
+h2 現在の面接日程
+- approval_interview = interviews.find_by(status: :approval)
+- if approval_interview.present?
+  p
+    strong = approval_interview.start_datetime.to_s(:ja) 
+    | に設定されています。
+- else
+  p まだ面接開始時間が設定されていません。
+
+hr
+
+p 面接日程を変更する場合は以下から選んでください。
+
+- interviews.each do |interview|
+  - if interview.approval?
+    - next
+  = form_with url: user_interview_approve_path(user, interview), method: :patch, local: true do |f|
+    = button_tag( data: { confirm: "#{interview.start_datetime.to_s(:ja)}で面接を確定してよろしいですか"}, class: "btn btn-secondary") do
+      = content_tag :span, interview.start_datetime.to_s(:ja)
+  br

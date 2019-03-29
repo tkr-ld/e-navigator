@@ -41,6 +41,9 @@ class InterviewsController < ApplicationController
     redirect_to user_interviews_path(@interview.user), notice: "面接日程を削除しました。"
   end
 
+  def apply
+  end
+
   def approve
     @interview = Interview.find(params[:interview_id])
     if @interview.approve_datetime

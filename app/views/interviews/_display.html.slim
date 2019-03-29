@@ -21,6 +21,12 @@ table.table.table-hover
                 = link_to '編集', edit_user_interview_path(id: interview.id), class: 'btn btn-secondary disabled'
             td
                 = link_to '削除', user_interview_path(id: interview.id), method: :delete, data: { confirm: "面接日程を削除します。よろしいですか？" }, class: 'btn btn-danger disabled'
-
-
-=link_to '新規面接作成', new_user_interview_path, class: 'btn btn-primary'
+.inline-left
+  = form_with url: apply_user_interviews_path(user), method: :post, local: true do |f|
+    .form-inline
+      .field
+        = f.collection_select :user_id, User.where.not(id: current_user.id), :id, :email, {prompt: false}, autofocus: true, class: 'form-control custom-select ajust'
+      .action
+        = f.submit "申請", class: 'btn btn-success'
+.inline-right
+  =link_to '新規面接作成', new_user_interview_path, class: 'btn btn-primary'

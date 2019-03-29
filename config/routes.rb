@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :edit, :update] do
     resources :interviews do
       patch :approve
+      collection do
+        post :apply
+      end
     end
   end
 

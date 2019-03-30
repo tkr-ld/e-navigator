@@ -42,6 +42,10 @@ class InterviewsController < ApplicationController
   end
 
   def apply
+    @approver = User.find(params[:approver_id])
+    @current_user = current_user
+    ApprovalApplicationMailer.application_email(@approver,@current_user).deliver
+    redirect_to user_interviews_path(params[:user_id]), notice: "申請が完了しました。"
   end
 
   def approve

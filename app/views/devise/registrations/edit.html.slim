@@ -11,11 +11,11 @@ h2
     = f.text_field :name, autofocus: true, class: 'form-control'
     = f.label :birth_date
     br
-    = f.date_select :birth_date, {start_year: 1989, end_year: 2001}, autofocus: true, class: 'form-control ajust'
+    = f.date_select :birth_date, {start_year: 1989, end_year: 2001}, autofocus: true, class: 'form-control bootstrap-date-ajust'
     br
     = f.label :sex
     br
-    = f.select :sex, User.sexes_i18n.keys.map {|k| [User.sexes_i18n[k], k]}, {}, autofocus: true, class: 'form-control bootstrap-sex-ajust'
+    = f.select :sex, User.sexes_i18n.keys.map {|k| [User.sexes_i18n[k], k]}, {}, autofocus: true, class: 'form-control ajust'
     = f.label :school
     br
     = f.text_field :school, autofocus: true, class: 'form-control'

@@ -1,5 +1,5 @@
 class ApprovalApplicationMailer < ApplicationMailer
-  default from: ENV['GMAIL_USER_ADDRESS']
+  default from: ENV['ENAVIGATOR_USER_ADDRESS']
 
   def application_email(approver,current_user)
     @current_user = current_user

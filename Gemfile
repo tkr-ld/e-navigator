@@ -57,4 +57,4 @@ gem 'enum_help'
 
 gem 'letter_opener_web', group:  :development
 
-gem 'dotenv-rails'
+gem 'dotenv-rails', require: 'dotenv/rails-now'

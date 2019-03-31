@@ -3,20 +3,21 @@ h2
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = render "devise/shared/error_messages", resource: resource
   .field
-    = f.label :email
+    strong = f.label :email
     br
     = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
-    = f.label :name
+    strong = f.label :name
     br
     = f.text_field :name, autofocus: true, class: 'form-control'
-    = f.label :birth_date
+    strong = f.label :birth_date
     br
-    = f.date_select :birth_date, {start_year: 1989, end_year: 2001}, autofocus: true, class: 'form-control bootstrap-date-ajust'
+    = f.date_select :birth_date, {start_year: 1989, end_year: 2001}, autofocus: true, class: 'form-control custom-select inline-ajust'
     br
-    = f.label :sex
+    strong = f.label :sex
     br
-    = f.select :sex, User.sexes_i18n.keys.map {|k| [User.sexes_i18n[k], k]}, {}, autofocus: true, class: 'form-control ajust'
-    = f.label :school
+    = f.select :sex, User.sexes_i18n.keys.map {|k| [User.sexes_i18n[k], k]}, {}, autofocus: true, class: 'form-control custom-select ajust'
+    br
+    strong = f.label :school
     br
     = f.text_field :school, autofocus: true, class: 'form-control'
     br

@@ -51,7 +51,8 @@ class InterviewsController < ApplicationController
   def approve
     @interview = Interview.find(params[:interview_id])
     if @interview.approve_datetime
-      ApprovalApplicationMailer.approval_email(@interview, @current_user).deliver
+      ApprovalApplicationMailer.approval_email_for_applicant(@interview, @current_user).deliver
+      ApprovalApplicationMailer.approval_email_for_approver(@interview, @current_user).deliver
       update_success_redirect(@interview)
     else
       render :edit

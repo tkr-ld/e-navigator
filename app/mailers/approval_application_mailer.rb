@@ -10,14 +10,23 @@ class ApprovalApplicationMailer < ApplicationMailer
     )
   end
 
-  def approval_email(interview,current_user)
+  def approval_email_for_applicant(interview,current_user)
     @interview = interview
-    @applicant = @interview.user
     @current_user = current_user
 
     mail(
       subject: '面接日時が確定しました',
-      to: "#{@applicant.email}, #{@current_user.email}"
+      to: @interview.user.email
+    )
+  end
+
+  def approval_email_for_approver(interview,current_user)
+    @interview = interview
+    @current_user = current_user
+
+    mail(
+      subject: '面接日時が確定しました',
+      to: @current_user.email
     )
   end
 end

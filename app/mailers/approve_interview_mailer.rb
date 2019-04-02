@@ -1,15 +1,4 @@
-class ApprovalApplicationMailer < ApplicationMailer
-  default from: ENV['ENAVIGATOR_USER_ADDRESS']
-
-  def application_email(approver,current_user)
-    @current_user = current_user
-
-    mail(
-      subject: '面接希望日が決まりました',
-      to: approver.email
-    )
-  end
-
+class ApproveInteviewMailer < ApplicationMailer
   def approval_email_for_applicant(interview,current_user)
     @interview = interview
     @current_user = current_user

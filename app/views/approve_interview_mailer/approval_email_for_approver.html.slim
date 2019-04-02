@@ -1,8 +1,0 @@
-p
-  = @interview.user.name
-  | さんの面接時間を以下の日程で確定しました。
-p 
-  | 日程:
-  = @interview.start_datetime.to_s(:ja)
-p 日程を変更したい場合は以下のURLからご変更ください。
-p = link_to user_interviews_url(@interview.user), user_interviews_url(@interview.user)

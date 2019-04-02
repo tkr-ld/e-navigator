@@ -1,5 +1,5 @@
 class ApplyInterviewMailer < ApplicationMailer
-  def application_email(approver,current_user)
+  def interviewer(approver,current_user)
   @current_user = current_user
 
   mail(

@@ -1,5 +1,5 @@
-class ApproveInteviewMailer < ApplicationMailer
-  def approval_email_for_applicant(interview,current_user)
+class ApproveInterviewMailer < ApplicationMailer
+  def interviewee(interview,current_user)
     @interview = interview
     @current_user = current_user
 
@@ -9,7 +9,7 @@ class ApproveInteviewMailer < ApplicationMailer
     )
   end
 
-  def approval_email_for_approver(interview,current_user)
+  def interviewer(interview,current_user)
     @interview = interview
 
     mail(

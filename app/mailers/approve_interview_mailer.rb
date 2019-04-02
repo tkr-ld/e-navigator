@@ -1,7 +1,7 @@
 class ApproveInterviewMailer < ApplicationMailer
-  def interviewee(interview,current_user)
+  def interviewee(interview, approver)
     @interview = interview
-    @current_user = current_user
+    @approver = approver
 
     mail(
       subject: '面接日時が確定しました',
@@ -9,12 +9,12 @@ class ApproveInterviewMailer < ApplicationMailer
     )
   end
 
-  def interviewer(interview,current_user)
+  def interviewer(interview, approver)
     @interview = interview
 
     mail(
       subject: '面接日時が確定しました',
-      to: current_user.email
+      to: approver.email
     )
   end
 end

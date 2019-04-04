@@ -1,15 +1,19 @@
 @import "bootstrap";
 
-.bootstrap-date-ajust {
+.inline-ajust {
     display: inline-block;
     width: auto;
 }
 
-.bootstrap-sex-ajust {
+.ajust {
     width: auto;
 }
 
-#interview_start_time {
-    display: inline-block;
-    width: auto;
+.inline-right {
+    float: right;
 }
+
+.inline-left {
+    float: left;
+}
+

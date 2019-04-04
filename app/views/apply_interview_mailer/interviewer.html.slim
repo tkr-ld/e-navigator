@@ -1,0 +1,5 @@
+p 
+  = @applicant.name
+  | さんの面接希望日が決まりました。
+p 以下のURLから、面接日時の承認をよろしくお願いいたします。
+p = link_to user_interviews_url(@applicant), user_interviews_url(@applicant)

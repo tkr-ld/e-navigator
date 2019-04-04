@@ -1,6 +1,6 @@
 h1 #{@user.name}さんの面接一覧
 
 - if @user == current_user
-  =render partial: 'display', locals: { interviews: @interviews }
+  =render partial: 'display', locals: { interviews: @interviews, user: @user }
 - else
   =render partial: 'approval', locals: { interviews: @interviews, user: @user }

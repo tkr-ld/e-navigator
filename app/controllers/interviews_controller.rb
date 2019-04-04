@@ -41,9 +41,18 @@ class InterviewsController < ApplicationController
     redirect_to user_interviews_path(@interview.user), notice: "面接日程を削除しました。"
   end
 
+  def apply
+    @approver = User.find(params[:approver_id])
+    @current_user = current_user
+    ApplyInterviewMailer.interviewer(@approver, @current_user).deliver
+    redirect_to user_interviews_path(params[:user_id]), notice: "申請が完了しました。"
+  end
+
   def approve
     @interview = Interview.find(params[:interview_id])
     if @interview.approve_datetime
+      ApproveInterviewMailer.interviewee(@interview, @current_user).deliver
+      ApproveInterviewMailer.interviewer(@interview, @current_user).deliver
       update_success_redirect(@interview)
     else
       render :edit
